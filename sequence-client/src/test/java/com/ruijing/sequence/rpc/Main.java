@@ -28,12 +28,13 @@ public class Main {
         long start = System.currentTimeMillis();
         int size = 100;
         for (int i = 0; i < size; i++) {
-            final int x = i;
+            long time = System.currentTimeMillis();
             RemoteResponse<Long> response = idGenerator.nextId("test", "test");
-            System.out.println(response);
+            System.out.println(response + ",cost_time:" + (System.currentTimeMillis() - time));
             //Thread.sleep(50);
         }
         //Thread.sleep(99999999);
         System.out.println("sync.cost:" + (System.currentTimeMillis() - start));
+        System.exit(1);
     }
 }

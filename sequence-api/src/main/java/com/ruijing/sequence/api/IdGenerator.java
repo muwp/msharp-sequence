@@ -1,6 +1,6 @@
 package com.ruijing.sequence.api;
 
-import com.ruijing.fundamental.api.annotation.NotNull;
+import com.ruijing.fundamental.api.annotation.NotBlank;
 import com.ruijing.fundamental.api.remote.RemoteResponse;
 
 /**
@@ -20,5 +20,5 @@ public interface IdGenerator {
      * @param token   用于客户端业务鉴权的token,需要向平台申请
      * @return 唯一id号
      */
-    RemoteResponse<Long> nextId(@NotNull String bizName, @NotNull String token);
+    RemoteResponse<Long> nextId(@NotBlank String bizName, @NotBlank String token);
 }
