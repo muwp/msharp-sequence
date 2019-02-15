@@ -1,6 +1,6 @@
 package com.ruijing.sequence.helper;
 
-import com.ruijing.sequence.enums.TypeEnum;
+import com.ruijing.sequence.enums.ModeEnum;
 import com.ruijing.sequence.exception.SequenceException;
 import com.ruijing.sequence.service.Sequence;
 
@@ -166,7 +166,7 @@ public class SnowflakeHelper implements Sequence {
     }
 
     @Override
-    public TypeEnum getType() {
-        return TypeEnum.SNOW_FLAKE;
+    public ModeEnum getType() {
+        return ModeEnum.SNOW_FLAKE;
     }
 }

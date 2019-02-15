@@ -35,6 +35,7 @@ public class SequenceDaoImpl implements SequenceDao, RowMapper<Sequence> {
 
     private JdbcTemplate jdbcTemplate;
 
+    @Override
     public int insert(final String name, final long initStepValue) {
         return jdbcTemplate.update(SQL_INSERT_RANGE, new Object[]{name, initStepValue, new Timestamp(System.currentTimeMillis())});
     }

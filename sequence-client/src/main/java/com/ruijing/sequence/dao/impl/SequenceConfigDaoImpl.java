@@ -21,7 +21,7 @@ import java.util.List;
  **/
 public class SequenceConfigDaoImpl implements SequenceConfigDao, RowMapper<SequenceConfig> {
 
-    private final static String SQL_SELECT_RANGE = "SELECT id,biz_name,model,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=?";
+    private final static String SQL_SELECT_RANGE = "SELECT id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -36,6 +36,7 @@ public class SequenceConfigDaoImpl implements SequenceConfigDao, RowMapper<Seque
      * @param bizName 来源
      * @return 区间值
      */
+    @Override
     public List<SequenceConfig> query(String bizName) {
         return jdbcTemplate.query(SQL_SELECT_RANGE, new Object[]{bizName}, this);
     }
@@ -47,10 +48,10 @@ public class SequenceConfigDaoImpl implements SequenceConfigDao, RowMapper<Seque
         Object[] args;
         final StringBuilder sql = new StringBuilder();
         if (StringUtils.isBlank(bizName)) {
-            sql.append("select id,biz_name,model,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config limit ?,?");
+            sql.append("select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config limit ?,?");
             args = new Object[]{index, pageSize};
         } else {
-            sql.append("select id,biz_name,model,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=? limit ?,?");
+            sql.append("select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=? limit ?,?");
             args = new Object[]{bizName, index, pageSize};
         }
         return jdbcTemplate.query(sql.toString(), args, this);

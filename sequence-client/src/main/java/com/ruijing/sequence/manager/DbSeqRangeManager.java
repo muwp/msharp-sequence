@@ -32,7 +32,7 @@ public class DbSeqRangeManager {
     /**
      * 表名，默认range
      */
-    private String tableName = "com/ruijing/sequence";
+    private String tableName = "sequence";
 
     public SeqRange nextRange(final String bizName) throws SequenceException {
         Long oldValue;
@@ -71,7 +71,6 @@ public class DbSeqRangeManager {
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
-
 
     public SequenceDao getSequenceDao() {
         return sequenceDao;

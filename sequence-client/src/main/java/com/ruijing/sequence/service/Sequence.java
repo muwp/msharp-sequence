@@ -1,6 +1,6 @@
 package com.ruijing.sequence.service;
 
-import com.ruijing.sequence.enums.TypeEnum;
+import com.ruijing.sequence.enums.ModeEnum;
 
 /**
  * 唯一id生成器(全局id生成器)
@@ -23,7 +23,7 @@ public interface Sequence {
     /**
      * 获取序列化模式
      *
-     * @return {@link TypeEnum}
+     * @return {@link ModeEnum}
      */
-    TypeEnum getType();
+    ModeEnum getType();
 }

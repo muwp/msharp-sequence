@@ -1,6 +1,6 @@
 package com.ruijing.sequence.sequence.snowflake;
 
-import com.ruijing.sequence.enums.TypeEnum;
+import com.ruijing.sequence.enums.ModeEnum;
 import com.ruijing.sequence.service.Sequence;
 
 import java.util.Random;
@@ -186,8 +186,8 @@ public class SnowflakeSequence implements Sequence {
     }
 
     @Override
-    public TypeEnum getType() {
-        return TypeEnum.SNOW_FLAKE;
+    public ModeEnum getType() {
+        return ModeEnum.SNOW_FLAKE;
     }
 
     public static void main(String[] args) {

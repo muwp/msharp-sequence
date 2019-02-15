@@ -1,7 +1,7 @@
 ## 创建数据库msharp_sequence
 CREATE DATABASE if not exists msharp_sequence;
 
-## 序列表(sequence)
+## 序列号表(sequence_data)
 CREATE TABLE IF NOT EXISTS `sequence_data`
 (
   `id`          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -52,4 +52,7 @@ CREATE TABLE IF NOT EXISTS `sequence_config`
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8
   COMMENT = '序列表配置';
+
+insert into sequence_config(biz_name, mode, type, token, reset_time)
+values ('test', 'db', 1, 'test', now());
 

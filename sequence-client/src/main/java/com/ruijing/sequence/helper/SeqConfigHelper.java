@@ -23,7 +23,7 @@ public abstract class SeqConfigHelper {
 
     private final static String SQL_UPDATE_RANGE = "UPDATE sequence_config SET max_id=? WHERE biz_name=? AND max_id=?";
 
-    private final static String SQL_SELECT_RANGE = "SELECT id,biz_name,model,type,init_value,step,retry_times,token,update_time FROM sequence_config WHERE biz_name=?";
+    private final static String SQL_SELECT_RANGE = "SELECT id,biz_name,mode,type,init_value,step,retry_times,token,update_time FROM sequence_config WHERE biz_name=?";
 
     /**
      * 插入数据区间

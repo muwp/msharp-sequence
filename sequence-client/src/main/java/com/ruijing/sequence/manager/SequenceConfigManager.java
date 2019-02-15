@@ -2,8 +2,10 @@ package com.ruijing.sequence.manager;
 
 import com.ruijing.sequence.dao.SequenceConfigDao;
 import com.ruijing.sequence.dao.SequenceDao;
+import com.ruijing.sequence.enums.ModeEnum;
 import com.ruijing.sequence.model.Sequence;
 import com.ruijing.sequence.model.SequenceConfig;
+import com.ruijing.sequence.sequence.db.DbRangeSequence;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.Date;
@@ -82,7 +84,11 @@ public class SequenceConfigManager implements Runnable {
                 if (CollectionUtils.isEmpty(configs)) {
                     break;
                 }
+
                 for (final SequenceConfig config : configs) {
+                    if (config.getMode().equals(ModeEnum.SNOW_FLAKE)) {
+                        continue;
+                    }
                     final SequenceConfig old = this.cache.get(config.getBizName());
                     if (null == old) {
                         this.cache.put(config.getBizName(), config);
@@ -153,6 +159,8 @@ public class SequenceConfigManager implements Runnable {
         if (CollectionUtils.isEmpty(sequences)) {
             return;
         }
+        //reset biz initValue
+        DbRangeSequence.resetSeqRange(config.getBizName());
         for (final Sequence sequence : sequences) {
             if (config.getInitValue() == sequence.getMaxId()) {
                 continue;

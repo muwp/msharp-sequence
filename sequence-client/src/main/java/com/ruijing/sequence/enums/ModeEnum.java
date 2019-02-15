@@ -7,20 +7,21 @@ package com.ruijing.sequence.enums;
  * @version 1.0
  * @created 2019/02/14 15:51
  **/
-public enum TypeEnum {
+public enum ModeEnum {
 
     /**
-     * DB type
+     * DB mode
      */
     DB(1, "db"),
 
     /**
-     * redis type
+     * redis mode
      */
+    @Deprecated
     REDIS(2, "redis"),
 
     /**
-     * snowflake type
+     * snowflake mode
      */
     SNOW_FLAKE(3, "snowflake");
 
@@ -28,7 +29,7 @@ public enum TypeEnum {
 
     private final String name;
 
-    TypeEnum(int code, String name) {
+    ModeEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }
@@ -43,7 +44,7 @@ public enum TypeEnum {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("TypeEnum{");
+        final StringBuffer sb = new StringBuffer("ModeEnum{");
         sb.append("code=").append(code);
         sb.append(", name='").append(name).append('\'');
         sb.append('}');
