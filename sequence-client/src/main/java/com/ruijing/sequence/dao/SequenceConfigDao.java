@@ -1,6 +1,5 @@
 package com.ruijing.sequence.dao;
 
-
 import com.ruijing.sequence.model.SequenceConfig;
 
 import java.util.List;
@@ -14,8 +13,18 @@ import java.util.List;
  **/
 public interface SequenceConfigDao {
 
+    /**
+     * @param config 序列号配置信息
+     * @return
+     */
     int update(SequenceConfig config);
 
+    /**
+     * 查询区间，如果区间不存在，会新增一个区间，并返回null，由上层重新执行
+     *
+     * @param bizName 业务名称
+     * @return 区间值
+     */
     List<SequenceConfig> query(String bizName);
 
     /**
@@ -27,5 +36,4 @@ public interface SequenceConfigDao {
      * @return 区间值
      */
     List<SequenceConfig> queryForList(final String bizName, final int index, final int pageSize);
-
 }

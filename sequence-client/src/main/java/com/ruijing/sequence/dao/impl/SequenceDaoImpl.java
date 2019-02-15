@@ -29,9 +29,9 @@ public class SequenceDaoImpl implements SequenceDao, RowMapper<Sequence> {
 
     private final static String SQL_UPDATE_RANGE = "UPDATE sequence_data SET max_id=? WHERE biz_name=? AND max_id=?";
 
-    private final static String SQL_SELECT_RANGE = "SELECT max_id FROM sequence_data WHERE biz_name=?";
+    private final static String SQL_SELECT_MAX_ID_RANGE = "SELECT max_id FROM sequence_data WHERE biz_name=?";
 
-    private final static String SQL_QUERY_RANGE = "SELECT id,biz_name,max_id,update_time FROM sequence_data WHERE biz_name=?";
+    private final static String SQL_QUERY_RANGE = "SELECT id,biz_name,max_id,update_time FROM sequence_data where biz_name=?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -49,7 +49,7 @@ public class SequenceDaoImpl implements SequenceDao, RowMapper<Sequence> {
     @Override
     public Long selectRange(final String bizName, final long stepStart) {
         long oldValue;
-        final List<Long> list = jdbcTemplate.queryForList(SQL_SELECT_RANGE, new Object[]{bizName}, Long.class);
+        final List<Long> list = jdbcTemplate.queryForList(SQL_SELECT_MAX_ID_RANGE, new Object[]{bizName}, Long.class);
         if (CollectionUtils.isEmpty(list)) {
             //没有此类型数据，需要初始化
             insert(bizName, stepStart);
@@ -90,8 +90,8 @@ public class SequenceDaoImpl implements SequenceDao, RowMapper<Sequence> {
     }
 
     @Override
-    public List<Sequence> queryForList(String bizName) {
-        return jdbcTemplate.query("select id,biz_name,max_id,update_time from sequence_data where biz_name=?", new Object[]{bizName}, this);
+    public List<Sequence> queryForList(final String bizName) {
+        return jdbcTemplate.query(SQL_QUERY_RANGE, new Object[]{bizName}, this);
     }
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
