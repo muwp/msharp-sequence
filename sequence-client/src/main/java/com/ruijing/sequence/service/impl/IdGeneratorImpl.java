@@ -1,9 +1,9 @@
 package com.ruijing.sequence.service.impl;
 
-import com.ruijing.fundamental.api.remote.RemoteResponse;
+import com.ruijing.sequence.api.remote.RemoteResponse;
 import com.ruijing.fundamental.cat.Cat;
 import com.ruijing.fundamental.cat.message.Transaction;
-import com.ruijing.sequence.api.IdGenerator;
+import com.ruijing.sequence.api.service.IdGenerator;
 import com.ruijing.sequence.manager.SequenceConfigManager;
 import com.ruijing.sequence.model.SequenceConfig;
 import com.ruijing.sequence.service.Sequence;

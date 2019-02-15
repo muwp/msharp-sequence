@@ -19,13 +19,13 @@ import java.util.concurrent.TimeUnit;
 @Fork(1)
 @Threads(8)
 @State(Scope.Benchmark)
-public class RedisTest_Jmh extends BaseTest {
+public class SnowflakeTestJmh extends BaseTest {
 
     private Sequence sequence;
 
     @Setup
     public void setup() {
-        sequence = getRedisSequence();
+        sequence = getSnowflakeSequence();
     }
 
     @Benchmark
@@ -34,8 +34,8 @@ public class RedisTest_Jmh extends BaseTest {
     }
 
     public static void main(String[] args) throws RunnerException {
-        Options options = new OptionsBuilder().include(RedisTest_Jmh.class.getSimpleName()).output(
-                "/Users/xuan/Documents/Code/xuan/gitee/xsequence/doc/jmh/RedisTest_Jmh.log").forks(4).build();
+        Options options = new OptionsBuilder().include(SnowflakeTestJmh.class.getSimpleName()).output(
+                "/Users/xuan/Documents/Code/xuan/gitee/xsequence/doc/jmh/SnowflakeTestJmh.log").forks(4).build();
         new Runner(options).run();
     }
 }

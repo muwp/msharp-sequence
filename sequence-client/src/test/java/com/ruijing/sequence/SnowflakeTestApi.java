@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * Created by xuan on 2018/5/9.
  */
-public class SnowflakeTest_Api extends BaseTest {
+public class SnowflakeTestApi extends BaseTest {
 
     private Sequence sequence;
 

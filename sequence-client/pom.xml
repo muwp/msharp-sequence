@@ -12,7 +12,6 @@
     <artifactId>sequence-client</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>com.ruijing.sequence</groupId>
             <artifactId>sequence-api</artifactId>
@@ -112,11 +111,6 @@
             <version>${cat-client-version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.ruijing.fundamental</groupId>
-            <artifactId>com-ruijing-fundamental-remoting</artifactId>
-            <version>1.1.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>

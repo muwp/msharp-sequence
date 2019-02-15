@@ -1,7 +1,7 @@
-package com.ruijing.sequence.api;
+package com.ruijing.sequence.api.service;
 
-import com.ruijing.fundamental.api.annotation.NotBlank;
-import com.ruijing.fundamental.api.remote.RemoteResponse;
+import com.ruijing.sequence.api.annotation.NotBlank;
+import com.ruijing.sequence.api.remote.RemoteResponse;
 
 /**
  * 锐竞全局统一id生成器
