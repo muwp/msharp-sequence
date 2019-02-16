@@ -2,6 +2,7 @@ package com.ruijing.sequence.builder;
 
 import com.ruijing.sequence.dao.impl.SequenceConfigDaoImpl;
 import com.ruijing.sequence.dao.impl.SequenceDaoImpl;
+import com.ruijing.sequence.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.manager.DbSeqRangeManager;
 import com.ruijing.sequence.manager.SequenceConfigManager;
 import com.ruijing.sequence.sequence.db.DbRangeSequence;
@@ -35,8 +36,7 @@ public class DbSeqBuilder implements SeqBuilder {
         //利用DB获取区间管理器
         final DbSeqRangeManager dbSeqRangeManager = new DbSeqRangeManager();
         dbSeqRangeManager.setTableName(this.tableName);
-        final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
+        final SimpleJdbcTemplate jdbcTemplate = new SimpleJdbcTemplate(dataSource);
         final SequenceDaoImpl sequenceDao = new SequenceDaoImpl();
         sequenceDao.setJdbcTemplate(jdbcTemplate);
         dbSeqRangeManager.setSequenceDao(sequenceDao);

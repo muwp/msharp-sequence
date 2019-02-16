@@ -1,15 +1,11 @@
 package com.ruijing.sequence.dao.impl;
 
-
 import com.ruijing.sequence.dao.SequenceConfigDao;
+import com.ruijing.sequence.jdbc.rowmapper.SequenceConfigRowMapper;
+import com.ruijing.sequence.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.model.SequenceConfig;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,11 +15,11 @@ import java.util.List;
  * @version 1.0
  * @created 2019/02/13 13:51
  **/
-public class SequenceConfigDaoImpl implements SequenceConfigDao, RowMapper<SequenceConfig> {
+public class SequenceConfigDaoImpl implements SequenceConfigDao {
 
     private final static String SQL_SELECT_RANGE = "SELECT id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=?";
 
-    private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcTemplate jdbcTemplate;
 
     @Override
     public int update(SequenceConfig config) {
@@ -38,7 +34,7 @@ public class SequenceConfigDaoImpl implements SequenceConfigDao, RowMapper<Seque
      */
     @Override
     public List<SequenceConfig> query(String bizName) {
-        return jdbcTemplate.query(SQL_SELECT_RANGE, new Object[]{bizName}, this);
+        return jdbcTemplate.query(SQL_SELECT_RANGE, new Object[]{bizName}, SequenceConfigRowMapper.getInstance());
     }
 
     @Override
@@ -54,36 +50,11 @@ public class SequenceConfigDaoImpl implements SequenceConfigDao, RowMapper<Seque
             sql.append("select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=? limit ?,?");
             args = new Object[]{bizName, index, pageSize};
         }
-        return jdbcTemplate.query(sql.toString(), args, this);
+        return jdbcTemplate.query(sql.toString(), args, SequenceConfigRowMapper.getInstance());
     }
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+
+    public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-    }
-
-    @Override
-    public SequenceConfig mapRow(ResultSet rs, int rowNum) throws SQLException {
-        final SequenceConfig sequenceConfig = new SequenceConfig();
-        final Long id = rs.getLong(1);
-        sequenceConfig.setId(id);
-        final String name = rs.getString(2);
-        sequenceConfig.setBizName(name);
-        final String model = rs.getString(3);
-        sequenceConfig.setMode(model);
-        final int type = rs.getInt(4);
-        sequenceConfig.setType(type);
-        final Long initValue = rs.getLong(5);
-        sequenceConfig.setInitValue(initValue);
-        final int step = rs.getInt(6);
-        sequenceConfig.setStep(step);
-        final int retryTimes = rs.getInt(7);
-        sequenceConfig.setRetryTimes(retryTimes);
-        final String token = rs.getString(8);
-        sequenceConfig.setToken(token);
-        final Date resetDate = rs.getTimestamp(9);
-        sequenceConfig.setResetTime(resetDate);
-        final Date updateTime = rs.getTimestamp(10);
-        sequenceConfig.setUpdateTime(updateTime);
-        return sequenceConfig;
     }
 }

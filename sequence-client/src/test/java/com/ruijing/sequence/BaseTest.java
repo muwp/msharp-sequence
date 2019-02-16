@@ -73,7 +73,7 @@ public class BaseTest {
         CountDownLatch countDownLatch = new CountDownLatch(20);
 
         for (int i = 0; i < 20; i++) {
-            // Thread thread = new Thread(() -> {
+            // Thread threadpool = new Thread(() -> {
             for (int j = 0; j < 100; j++) {
                 long start = System.currentTimeMillis();
                 long seq = sequence.nextId("test");
@@ -81,8 +81,8 @@ public class BaseTest {
             }
             //   countDownLatch.countDown();
             //   });
-            //  thread.setName("thread-" + i);
-            // thread.start();
+            //  threadpool.setName("threadpool-" + i);
+            // threadpool.start();
         }
 
         try {

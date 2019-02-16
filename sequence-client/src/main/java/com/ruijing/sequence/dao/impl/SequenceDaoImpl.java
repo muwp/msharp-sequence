@@ -2,16 +2,14 @@ package com.ruijing.sequence.dao.impl;
 
 import com.ruijing.sequence.dao.SequenceDao;
 import com.ruijing.sequence.exception.SequenceException;
+import com.ruijing.sequence.jdbc.rowmapper.SequenceRowMapper;
+import com.ruijing.sequence.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.model.Sequence;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
+
 import java.util.List;
 
 /**
@@ -21,7 +19,7 @@ import java.util.List;
  * @version 1.0
  * @created 2019/02/13 13:51
  **/
-public class SequenceDaoImpl implements SequenceDao, RowMapper<Sequence> {
+public class SequenceDaoImpl implements SequenceDao {
 
     private static final long DELTA = 100000000L;
 
@@ -33,7 +31,7 @@ public class SequenceDaoImpl implements SequenceDao, RowMapper<Sequence> {
 
     private final static String SQL_QUERY_RANGE = "SELECT id,biz_name,max_id,update_time FROM sequence_data where biz_name=?";
 
-    private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcTemplate jdbcTemplate;
 
     @Override
     public int insert(final String name, final long initStepValue) {
@@ -86,29 +84,16 @@ public class SequenceDaoImpl implements SequenceDao, RowMapper<Sequence> {
             sql.append("select id,biz_name,max_id,update_time from sequence_data where biz_name=? limit ?,?");
             args = new Object[]{bizName, index, pageSize};
         }
-        return jdbcTemplate.query(sql.toString(), args, this);
+        return jdbcTemplate.query(sql.toString(), args, SequenceRowMapper.getInstance());
     }
 
     @Override
     public List<Sequence> queryForList(final String bizName) {
-        return jdbcTemplate.query(SQL_QUERY_RANGE, new Object[]{bizName}, this);
+        return jdbcTemplate.query(SQL_QUERY_RANGE, new Object[]{bizName}, SequenceRowMapper.getInstance());
     }
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public Sequence mapRow(ResultSet rs, int rowNum) throws SQLException {
-        final Sequence sequence = new Sequence();
-        final Long id = rs.getLong(1);
-        sequence.setId(id);
-        final long maxId = rs.getLong(3);
-        sequence.setMaxId(maxId);
-        final String name = rs.getString(2);
-        sequence.setBizName(name);
-        final Date updateTime = rs.getTimestamp(4);
-        sequence.setUpdateTime(updateTime);
-        return sequence;
-    }
 }

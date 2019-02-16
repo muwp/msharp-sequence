@@ -1,6 +1,6 @@
 package com.ruijing.sequence.builder;
 
-import com.ruijing.sequence.helper.SnowflakeHelper;
+import com.ruijing.sequence.sequence.snowflake.SnowflakeSequence;
 import com.ruijing.sequence.service.Sequence;
 
 /**
@@ -24,8 +24,8 @@ public class SnowflakeSeqBuilder implements SeqBuilder {
 
     @Override
     public Sequence build() {
-        SnowflakeHelper sequence = new SnowflakeHelper();
-        sequence.setDatacenterId(this.datacenterId);
+        SnowflakeSequence sequence = new SnowflakeSequence();
+        sequence.setDataCenterId(this.datacenterId);
         sequence.setWorkerId(this.workerId);
         return sequence;
     }

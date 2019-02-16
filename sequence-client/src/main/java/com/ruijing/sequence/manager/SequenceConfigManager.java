@@ -3,19 +3,18 @@ package com.ruijing.sequence.manager;
 import com.ruijing.sequence.dao.SequenceConfigDao;
 import com.ruijing.sequence.dao.SequenceDao;
 import com.ruijing.sequence.enums.ModeEnum;
+import com.ruijing.sequence.enums.TypeEnum;
 import com.ruijing.sequence.model.Sequence;
 import com.ruijing.sequence.model.SequenceConfig;
 import com.ruijing.sequence.sequence.db.DbRangeSequence;
+import com.ruijing.sequence.threadpool.NamedThreadFactory;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * 唯一id生成器配置管理器
@@ -32,16 +31,7 @@ public class SequenceConfigManager implements Runnable {
 
     private Map<String, SequenceConfig> cache = new HashMap<>();
 
-    private ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
-
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread t = new Thread(r);
-            t.setName("sequence-check-idCache-thread");
-            t.setDaemon(true);
-            return t;
-        }
-    });
+    private ScheduledExecutorService service = new ScheduledThreadPoolExecutor(1, new NamedThreadFactory("sequence-check-idCache-thread", true));
 
     public SequenceConfigManager() {
         this.service.scheduleAtFixedRate(this, 10, 60, TimeUnit.SECONDS);
@@ -126,23 +116,38 @@ public class SequenceConfigManager implements Runnable {
     private void resetSequenceData(final SequenceConfig config) {
         try {
             final int type = config.getType();
-            if (type == 0) {
+            if (type == TypeEnum.NONE.getCode()) {
                 return;
             }
             final Date resetTime = config.getResetTime();
             if (null == resetTime) {
                 return;
             }
+
+            //get now time
             final Date now = new Date();
-            if (type == 1 && now.getMinutes() != resetTime.getMinutes()) {
+            final int nowMinutes = now.getMinutes();
+            final int nowHours = now.getHours();
+            final int nowDay = now.getDay();
+            final int nowMonth = now.getMonth();
+            final int nowYear = now.getYear();
+
+            //get old time
+            final int oldDay = resetTime.getDay();
+            final int oldMonth = resetTime.getMonth();
+            final int oldMinutes = resetTime.getMinutes();
+            final int oldHours = resetTime.getHours();
+            final int oldYear = resetTime.getYear();
+
+            if (type == TypeEnum.MINUTE.getCode() && !(nowYear == oldYear && nowMonth == oldMonth && nowDay == oldDay && nowHours == oldHours && nowMinutes == oldMinutes)) {
                 updateData(config, now);
-            } else if (type == 2 && now.getHours() != resetTime.getHours()) {
+            } else if (type == TypeEnum.HOUR.getCode() && !(nowYear == oldYear && nowMonth == oldMonth && nowDay == oldDay && nowHours == oldHours)) {
                 updateData(config, now);
-            } else if (type == 3 && now.getDay() != resetTime.getDay()) {
+            } else if (type == TypeEnum.DAY.getCode() && !(nowYear == oldYear && nowMonth == oldMonth && nowDay == oldDay)) {
                 updateData(config, now);
-            } else if (type == 4 && now.getMonth() != resetTime.getMonth()) {
+            } else if (type == TypeEnum.MONTH.getCode() && !(nowYear == oldYear && nowMonth == oldMonth)) {
                 updateData(config, now);
-            } else if (type == 5 && now.getYear() != resetTime.getYear()) {
+            } else if (type == TypeEnum.YEAR.getCode() && nowYear != oldYear) {
                 updateData(config, now);
             }
         } catch (Throwable ex) {
