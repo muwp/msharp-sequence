@@ -1,14 +1,13 @@
 package com.ruijing.sequence.builder;
 
+import com.muwp.sharding.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.dao.impl.SequenceConfigDaoImpl;
 import com.ruijing.sequence.dao.impl.SequenceDaoImpl;
-import com.ruijing.sequence.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.manager.DbSeqRangeManager;
 import com.ruijing.sequence.manager.SequenceConfigManager;
 import com.ruijing.sequence.sequence.db.DbRangeSequence;
 import com.ruijing.sequence.service.Sequence;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 

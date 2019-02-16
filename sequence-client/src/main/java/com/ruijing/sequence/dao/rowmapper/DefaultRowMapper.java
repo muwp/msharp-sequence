@@ -1,6 +1,6 @@
 package com.ruijing.sequence.dao.rowmapper;
 
-import com.ruijing.sequence.util.OrmUtil;
+import com.muwp.sharding.jdbc.util.OrmUtil;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

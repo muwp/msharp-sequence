@@ -1,8 +1,8 @@
 package com.ruijing.sequence.dao.impl;
 
+import com.muwp.sharding.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.dao.SequenceConfigDao;
 import com.ruijing.sequence.dao.rowmapper.SequenceConfigRowMapper;
-import com.ruijing.sequence.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.model.SequenceConfig;
 import org.apache.commons.lang3.StringUtils;
 

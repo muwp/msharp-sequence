@@ -1,9 +1,9 @@
 package com.ruijing.sequence.dao.impl;
 
+import com.muwp.sharding.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.dao.SequenceDao;
 import com.ruijing.sequence.exception.SequenceException;
 import com.ruijing.sequence.dao.rowmapper.SequenceRowMapper;
-import com.ruijing.sequence.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.model.Sequence;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
