@@ -1,4 +1,4 @@
-package com.ruijing.sequence.utils;
+package com.ruijing.sequence.util;
 
 import com.ruijing.sequence.jdbc.bean.SqlRunningBean;
 import com.ruijing.sequence.jdbc.reflect.FieldHandler;

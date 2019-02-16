@@ -1,4 +1,4 @@
-package com.ruijing.sequence.utils;
+package com.ruijing.sequence.util;
 
 import java.net.InetAddress;
 

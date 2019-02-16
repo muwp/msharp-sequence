@@ -2,7 +2,7 @@ package com.ruijing.sequence.jdbc.single;
 
 import com.ruijing.sequence.jdbc.bean.SqlRunningBean;
 import com.ruijing.sequence.dao.rowmapper.DefaultRowMapper;
-import com.ruijing.sequence.utils.SqlUtil;
+import com.ruijing.sequence.util.SqlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;

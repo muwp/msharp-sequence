@@ -1,7 +1,9 @@
 package com.ruijing.sequence.sequence.snowflake;
 
 import com.ruijing.sequence.enums.ModeEnum;
+import com.ruijing.sequence.load.Environment;
 import com.ruijing.sequence.service.Sequence;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Random;
 
@@ -90,7 +92,10 @@ public class SnowflakeSequence implements Sequence {
     private long lastTimestamp = -1L;
 
     public SnowflakeSequence() {
-        this(0L, 0L);
+        final String dataCenterId = Environment.getOrDefault("snowflake.sequence.machine.id", "0");
+        final int value = NumberUtils.toInt(dataCenterId);
+        this.validCheck(value, 0);
+        setDataCenterId(value);
     }
 
     /**
