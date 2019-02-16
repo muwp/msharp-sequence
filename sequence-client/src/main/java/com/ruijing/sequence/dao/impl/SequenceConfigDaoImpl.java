@@ -1,7 +1,7 @@
 package com.ruijing.sequence.dao.impl;
 
 import com.ruijing.sequence.dao.SequenceConfigDao;
-import com.ruijing.sequence.jdbc.rowmapper.SequenceConfigRowMapper;
+import com.ruijing.sequence.dao.rowmapper.SequenceConfigRowMapper;
 import com.ruijing.sequence.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.model.SequenceConfig;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +18,10 @@ import java.util.List;
 public class SequenceConfigDaoImpl implements SequenceConfigDao {
 
     private final static String SQL_SELECT_RANGE = "SELECT id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=?";
+
+    private final static String SQL_SELECT_BIZ_NAME_QUERY = "select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=? limit ?,?";
+
+    private final static String SQL_SELECT_NOT_BIZ_NAME_QUERY = "select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config limit ?,?";
 
     private SimpleJdbcTemplate jdbcTemplate;
 
@@ -44,15 +48,14 @@ public class SequenceConfigDaoImpl implements SequenceConfigDao {
         Object[] args;
         final StringBuilder sql = new StringBuilder();
         if (StringUtils.isBlank(bizName)) {
-            sql.append("select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config limit ?,?");
+            sql.append(SQL_SELECT_NOT_BIZ_NAME_QUERY);
             args = new Object[]{index, pageSize};
         } else {
-            sql.append("select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config WHERE biz_name=? limit ?,?");
+            sql.append(SQL_SELECT_BIZ_NAME_QUERY);
             args = new Object[]{bizName, index, pageSize};
         }
         return jdbcTemplate.query(sql.toString(), args, SequenceConfigRowMapper.getInstance());
     }
-
 
     public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

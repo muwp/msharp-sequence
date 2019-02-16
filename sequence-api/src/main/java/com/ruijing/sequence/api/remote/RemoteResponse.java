@@ -27,9 +27,9 @@ public class RemoteResponse<T> implements Serializable {
     private static final int EXCEPTION = 400;
 
     /**
-     * 非法参数
+     * 内部业务鉴权异常
      */
-    private static final int ILLEGAL_PARAMETER = 401;
+    public static final int UNAUTHORIZED = 401;
 
     private static final String SUCCESS_INFO = "success";
 
@@ -38,6 +38,7 @@ public class RemoteResponse<T> implements Serializable {
      * {@link RemoteResponse#SUCCESS}
      * {@link RemoteResponse#FAILURE}
      * {@link RemoteResponse#EXCEPTION}
+     * {@link RemoteResponse#UNAUTHORIZED}
      */
     private int code;
 
@@ -166,12 +167,6 @@ public class RemoteResponse<T> implements Serializable {
 
         public Builder setException(String msg) {
             code = EXCEPTION;
-            this.msg = msg;
-            return this;
-        }
-
-        public Builder setIllegalParameter(String msg) {
-            code = ILLEGAL_PARAMETER;
             this.msg = msg;
             return this;
         }

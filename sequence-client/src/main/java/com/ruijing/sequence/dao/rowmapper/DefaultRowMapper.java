@@ -1,4 +1,4 @@
-package com.ruijing.sequence.jdbc.rowmapper;
+package com.ruijing.sequence.dao.rowmapper;
 
 import com.ruijing.sequence.utils.OrmUtil;
 import org.springframework.jdbc.core.RowMapper;
