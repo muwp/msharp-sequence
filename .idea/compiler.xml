@@ -8,8 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sequence-api" />
         <module name="sequence-client" />
-        <module name="sequence-server" />
+        <module name="sequence-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sequence-server" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

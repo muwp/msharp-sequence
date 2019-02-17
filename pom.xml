@@ -10,8 +10,8 @@
     <version>1.1.0-SNAPSHOT</version>
     <modules>
         <module>sequence-api</module>
-        <module>sequence-server</module>
         <module>sequence-client</module>
+        <module>sequence-service</module>
     </modules>
 
     <properties>

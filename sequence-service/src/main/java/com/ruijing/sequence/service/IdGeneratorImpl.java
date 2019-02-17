@@ -1,12 +1,11 @@
-package com.ruijing.sequence.service.impl;
+package com.ruijing.sequence.service;
 
-import com.ruijing.sequence.api.remote.RemoteResponse;
 import com.ruijing.fundamental.cat.Cat;
 import com.ruijing.fundamental.cat.message.Transaction;
+import com.ruijing.sequence.api.remote.RemoteResponse;
 import com.ruijing.sequence.api.service.IdGenerator;
 import com.ruijing.sequence.manager.SequenceConfigManager;
 import com.ruijing.sequence.model.SequenceConfig;
-import com.ruijing.sequence.service.Sequence;
 
 import java.util.HashMap;
 import java.util.Map;

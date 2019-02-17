@@ -1,12 +1,12 @@
 package com.ruijing.sequence.dao.impl;
 
-import com.muwp.sharding.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.dao.SequenceDao;
 import com.ruijing.sequence.exception.SequenceException;
 import com.ruijing.sequence.dao.rowmapper.SequenceRowMapper;
 import com.ruijing.sequence.model.Sequence;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Timestamp;
 
@@ -31,7 +31,7 @@ public class SequenceDaoImpl implements SequenceDao {
 
     private final static String SQL_QUERY_RANGE = "SELECT id,biz_name,max_id,update_time FROM sequence_data where biz_name=?";
 
-    private SimpleJdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public int insert(final String name, final long initStepValue) {
@@ -92,7 +92,7 @@ public class SequenceDaoImpl implements SequenceDao {
         return jdbcTemplate.query(SQL_QUERY_RANGE, new Object[]{bizName}, SequenceRowMapper.getInstance());
     }
 
-    public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

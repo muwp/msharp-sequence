@@ -1,10 +1,10 @@
 package com.ruijing.sequence.dao.impl;
 
-import com.muwp.sharding.jdbc.single.SimpleJdbcTemplate;
 import com.ruijing.sequence.dao.SequenceConfigDao;
 import com.ruijing.sequence.dao.rowmapper.SequenceConfigRowMapper;
 import com.ruijing.sequence.model.SequenceConfig;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class SequenceConfigDaoImpl implements SequenceConfigDao {
 
     private final static String SQL_SELECT_NOT_BIZ_NAME_QUERY = "select id,biz_name,mode,type,init_value,step,retry_times,token,reset_time,update_time FROM sequence_config limit ?,?";
 
-    private SimpleJdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public int update(SequenceConfig config) {
@@ -57,7 +57,7 @@ public class SequenceConfigDaoImpl implements SequenceConfigDao {
         return jdbcTemplate.query(sql.toString(), args, SequenceConfigRowMapper.getInstance());
     }
 
-    public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
