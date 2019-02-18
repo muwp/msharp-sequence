@@ -1,4 +1,4 @@
-锐竞信息分布式id生成系统
+分布式id生成系统
 
 ## 创建数据库msharp_sequence
 CREATE DATABASE if not exists msharp_sequence;
