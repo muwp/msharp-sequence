@@ -30,17 +30,7 @@ public class DbRangeSequence implements Sequence {
 
     @Override
     public Long nextId(final String bizName) {
-        SeqRange seqRange = seqRangeMap.get(bizName);
-        //当前区间不存在，重新获取一个区间
-        if (null == seqRange) {
-            synchronized (bizName) {
-                seqRange = seqRangeMap.get(bizName);
-                if (null == seqRange) {
-                    seqRange = this.seqRangeManager.nextRange(bizName);
-                    seqRangeMap.put(bizName, seqRange);
-                }
-            }
-        }
+        SeqRange seqRange = load(bizName);
 
         //当value值为-1时，表明区间的序列号已经分配完，需要重新获取区间
         long value = seqRange.getAndIncrement();
@@ -70,6 +60,21 @@ public class DbRangeSequence implements Sequence {
         }
 
         return value;
+    }
+
+    private SeqRange load(final String bizName) {
+        SeqRange seqRange = seqRangeMap.get(bizName);
+        //当前区间不存在，重新获取一个区间
+        if (null == seqRange) {
+            synchronized (bizName) {
+                seqRange = seqRangeMap.get(bizName);
+                if (null == seqRange) {
+                    seqRange = this.seqRangeManager.nextRange(bizName);
+                    seqRangeMap.put(bizName, seqRange);
+                }
+            }
+        }
+        return seqRange;
     }
 
     public void setSeqRangeManager(DbSeqRangeManager seqRangeMgr) {
