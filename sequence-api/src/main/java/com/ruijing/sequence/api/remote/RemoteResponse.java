@@ -12,19 +12,24 @@ import java.io.Serializable;
 public class RemoteResponse<T> implements Serializable {
 
     /**
+     * 序列化uid
+     */
+    public static final long serialVersionUID = 586262417756505439L;
+
+    /**
      * 成功状态码
      */
-    private static final int SUCCESS = 200;
+    public static final int SUCCESS = 200;
 
     /**
      * 失败状态码
      */
-    private static final int FAILURE = 500;
+    public static final int FAILURE = 500;
 
     /**
      * 内部异常状态码
      */
-    private static final int EXCEPTION = 400;
+    public static final int EXCEPTION = 400;
 
     /**
      * 内部业务鉴权异常

@@ -1,5 +1,6 @@
 package com.ruijing.sequence.manager;
 
+import com.ruijing.fundamental.cat.Cat;
 import com.ruijing.sequence.dao.SequenceConfigDao;
 import com.ruijing.sequence.dao.SequenceDao;
 import com.ruijing.sequence.enums.ModeEnum;
@@ -31,14 +32,14 @@ public class SequenceConfigManager implements Runnable {
 
     private Map<String, SequenceConfig> cache = new HashMap<>();
 
-    private ScheduledExecutorService service = new ScheduledThreadPoolExecutor(1, new NamedThreadFactory("sequence-check-idCache-thread", true));
+    private ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1, new NamedThreadFactory("sequence-check-idCache-thread", true));
 
     public SequenceConfigManager() {
-        this.service.scheduleAtFixedRate(this, 10, 60, TimeUnit.SECONDS);
+        this.executorService.scheduleAtFixedRate(this, 10, 60, TimeUnit.SECONDS);
     }
 
     public SequenceConfig load(final String bizName) {
-        SequenceConfig configDO = cache.get(bizName);
+        SequenceConfig configDO = this.cache.get(bizName);
         if (null != configDO) {
             return configDO;
         }
@@ -99,7 +100,7 @@ public class SequenceConfigManager implements Runnable {
             }
         } catch (Throwable ex) {
             //quite
-            ex.printStackTrace();
+            Cat.logWarn("SequenceConfigManager", "run", ex);
         }
     }
 

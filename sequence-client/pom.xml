@@ -80,17 +80,10 @@
             <version>4.12</version>
         </dependency>
 
-        <!--JMH基准测试-->
         <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <version>1.19</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <version>1.19</version>
+            <groupId>cat-service</groupId>
+            <artifactId>cat-client</artifactId>
+            <version>${cat-client-version}</version>
         </dependency>
 
     </dependencies>

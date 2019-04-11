@@ -56,7 +56,7 @@ public class IdGeneratorImpl implements IdGenerator {
         }
 
         if (!sequenceConfig.getToken().equals(token)) {
-            return RemoteResponse.custom().setFailure(new StringBuffer().append("bizName[").append(bizName).append("] no authority,").append(" 相关问题QA: https://shimo.im/folder/YEO5OPjB0i8l98WZ").toString()).build();
+            return RemoteResponse.custom().setFailure(new StringBuffer().append("bizName[").append(bizName).append("] no authority,").append(" 相关问题QA: https://shimo.im/folder/YEO5OPjB0i8l98WZ").toString()).setCode(RemoteResponse.UNAUTHORIZED).build();
         }
 
         final Sequence sequence = this.sequenceMap.get(sequenceConfig.getMode());

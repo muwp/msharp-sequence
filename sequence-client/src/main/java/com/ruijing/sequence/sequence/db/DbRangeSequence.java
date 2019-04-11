@@ -30,7 +30,7 @@ public class DbRangeSequence implements Sequence {
 
     @Override
     public Long nextId(final String bizName) {
-        SeqRange seqRange = load(bizName);
+        SeqRange seqRange = this.load(bizName);
 
         //当value值为-1时，表明区间的序列号已经分配完，需要重新获取区间
         long value = seqRange.getAndIncrement();
