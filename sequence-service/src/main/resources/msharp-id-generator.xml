@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="sequenceConfigDao" class="com.ruijing.sequence.dao.impl.SequenceConfigDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="sequenceDao" class="com.ruijing.sequence.dao.impl.SequenceDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <!-- sequence管理管理器  -->
+    <bean id="sequenceConfigManager" class="com.ruijing.sequence.manager.SequenceConfigManager">
+        <property name="sequenceConfigDao" ref="sequenceConfigDao"/>
+        <property name="sequenceDao" ref="sequenceDao" />
+    </bean>
+
+    <!-- 序列号步长管理器 -->
+    <bean id="dbSeqRangeManager" class="com.ruijing.sequence.manager.DbSeqRangeManager">
+        <!-- 表名[可选] 默认：sequence-->
+        <property name="tableName" value="sequence"/>
+        <property name="configManager" ref="sequenceConfigManager"/>
+        <property name="sequenceDao" ref="sequenceDao"/>
+    </bean>
+
+    <!--db sequence -->
+    <bean id="dbRangeSequence" class="com.ruijing.sequence.sequence.db.DbRangeSequence">
+        <property name="seqRangeManager" ref="dbSeqRangeManager"/>
+    </bean>
+
+    <!--snowflake -->
+    <bean id="snowflakeSequence" class="com.ruijing.sequence.sequence.snowflake.SnowflakeSequence"/>
+
+    <bean id="idGenerator" class="com.ruijing.sequence.service.IdGeneratorImpl">
+        <property name="manager" ref="sequenceConfigManager"/>
+        <property name="sequences">
+            <list>
+                <ref bean="dbRangeSequence"/>
+                <ref bean="snowflakeSequence"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
