@@ -76,4 +76,12 @@ public class IdGeneratorImpl implements IdGenerator {
     public void setManager(SequenceConfigManager manager) {
         this.manager = manager;
     }
+
+    public void setDbSequence(Sequence sequence) {
+        sequenceMap.put(sequence.getType().getName(), sequence);
+    }
+
+    public void setSnowflakeSequence(Sequence sequence) {
+        sequenceMap.put(sequence.getType().getName(), sequence);
+    }
 }
