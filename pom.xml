@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ruijing.msharp</groupId>
-    <artifactId>sequence</artifactId>
+    <groupId>com.ruijing.fundamental</groupId>
+    <artifactId>sequence-all</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <modules>
         <module>sequence-api</module>
         <module>sequence-client</module>
@@ -21,11 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.17.RELEASE</spring.version>
         <commons-lang3>3.4</commons-lang3>
-        <msharp-version>1.1.1-SNAPSHOT</msharp-version>
-        <msharp-remoting-version>1.1.1-SNAPSHOT</msharp-remoting-version>
-        <msharp-api-version>1.1.1-SNAPSHOT</msharp-api-version>
-        <msharp-common-version>1.1.1-SNAPSHOT</msharp-common-version>
-        <cat-client-version>1.1.0-SNAPSHOT</cat-client-version>
+        <cat-client-version>1.2.0-SNAPSHOT</cat-client-version>
         <env>qa</env>
     </properties>
 
