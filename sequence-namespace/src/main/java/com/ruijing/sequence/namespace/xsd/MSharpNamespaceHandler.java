@@ -1,5 +1,5 @@
 
-package com.ruijing.sequence.xsd;
+package com.ruijing.sequence.namespace.xsd;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
@@ -15,6 +15,6 @@ public class MSharpNamespaceHandler extends NamespaceHandlerSupport {
 
     @Override
     public void init() {
-        registerBeanDefinitionParser("id-generator", new MSharpIdGeneratorDefinitionParser());
-      }
+        registerBeanDefinitionParser("id-generator-service", new MSharpIdGeneratorServiceDefinitionParser());
+    }
 }

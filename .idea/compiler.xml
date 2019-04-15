@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sequence-api" />
         <module name="sequence-client" />
+        <module name="sequence-namespace" />
         <module name="sequence-service" />
       </profile>
     </annotationProcessing>

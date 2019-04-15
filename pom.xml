@@ -12,6 +12,7 @@
         <module>sequence-api</module>
         <module>sequence-client</module>
         <module>sequence-service</module>
+        <module>sequence-namespace</module>
     </modules>
 
     <properties>

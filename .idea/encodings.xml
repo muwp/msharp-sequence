@@ -4,7 +4,7 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sequence-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sequence-client" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/sequence-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sequence-namespace" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sequence-service" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

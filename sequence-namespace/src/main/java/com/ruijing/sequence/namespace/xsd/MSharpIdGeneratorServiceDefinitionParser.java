@@ -1,4 +1,4 @@
-package com.ruijing.sequence.xsd;
+package com.ruijing.sequence.namespace.xsd;
 
 import com.ruijing.sequence.sequence.snowflake.SnowflakeSequence;
 import com.ruijing.sequence.service.IdGeneratorImpl;
@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  * @created 2018/8/19 16:41
  **/
-public class MSharpIdGeneratorDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class MSharpIdGeneratorServiceDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     @Override
     protected Class getBeanClass(Element element) {
@@ -31,7 +31,6 @@ public class MSharpIdGeneratorDefinitionParser extends AbstractSingleBeanDefinit
         }
 
         bean.addPropertyReference("manager", manager);
-
         //set dbSequence
         final String dbSequence = element.getAttribute("sequence");
         if (StringUtils.isNotBlank(dbSequence)) {

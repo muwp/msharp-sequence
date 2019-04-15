@@ -8,7 +8,30 @@
     <xsd:import namespace="http://www.springframework.org/schema/beans"/>
 
     <!-- msharp id generator -->
-    <xsd:element name="id-generator">
+    <xsd:element name="id-generator-client">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+
+                    <xsd:attribute name="manager" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[manager]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+
+                    <xsd:attribute name="sequence" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[dbSequence]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- msharp id generator -->
+    <xsd:element name="id-generator-service">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
